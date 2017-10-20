@@ -1,0 +1,79 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "KmjnydoAbofMieIWm+it5OWERaM=",
+			"path": "github.com/alecthomas/template",
+			"revision": "a0175ee3bccc567396460bf5acd36800cb10c49c",
+			"revisionTime": "2016-04-05T07:15:01Z"
+		},
+		{
+			"checksumSHA1": "3wt0pTXXeS+S93unwhGoLIyGX/Q=",
+			"path": "github.com/alecthomas/template/parse",
+			"revision": "a0175ee3bccc567396460bf5acd36800cb10c49c",
+			"revisionTime": "2016-04-05T07:15:01Z"
+		},
+		{
+			"checksumSHA1": "fCc3grA7vIxfBru7R3SqjcW+oLI=",
+			"path": "github.com/alecthomas/units",
+			"revision": "2efee857e7cfd4f3d0138cc3cbb1b4966962b93a",
+			"revisionTime": "2015-10-22T06:55:26Z"
+		},
+		{
+			"checksumSHA1": "gt4qjONr5JL9rMCJuEznegBkh5o=",
+			"path": "github.com/apex/log",
+			"revision": "0296d6eb16bb28f8a0c55668affcf4876dc269be",
+			"revisionTime": "2017-07-26T18:07:45Z"
+		},
+		{
+			"checksumSHA1": "rJab1YdNhQooDiBWNnt7TLWPyBU=",
+			"path": "github.com/pkg/errors",
+			"revision": "f15c970de5b76fac0b59abb32d62c17cc7bed265",
+			"revisionTime": "2017-10-18T19:55:50Z"
+		},
+		{
+			"checksumSHA1": "sLM5tRtL85eSdaxblyygnEB9kUI=",
+			"path": "github.com/segmentio/ecs-logs-go",
+			"revision": "d40ccf1f1507d7fe1a3aab980643aebc00d7fbfa",
+			"revisionTime": "2017-08-08T18:42:24Z"
+		},
+		{
+			"checksumSHA1": "bdRkX6PW5jL8fPYFPKRIkxctTRU=",
+			"path": "github.com/segmentio/ecs-logs-go/apex",
+			"revision": "d40ccf1f1507d7fe1a3aab980643aebc00d7fbfa",
+			"revisionTime": "2017-08-08T18:42:24Z"
+		},
+		{
+			"checksumSHA1": "afYiRmcXoIVksiKwc+aD5RDFKRQ=",
+			"path": "github.com/segmentio/ecs-logs-go/log",
+			"revision": "d40ccf1f1507d7fe1a3aab980643aebc00d7fbfa",
+			"revisionTime": "2017-08-08T18:42:24Z"
+		},
+		{
+			"checksumSHA1": "P2pafd/TUjCthU+JYDBnpBDlz4s=",
+			"path": "github.com/segmentio/stats",
+			"revision": "d5453edb8b8c439289c9dc721312766836a0909d",
+			"revisionTime": "2017-10-04T14:12:41Z"
+		},
+		{
+			"checksumSHA1": "nwMnsdQf0IZbAOC9pWklcniWv5k=",
+			"path": "github.com/segmentio/stats/datadog",
+			"revision": "d5453edb8b8c439289c9dc721312766836a0909d",
+			"revisionTime": "2017-10-04T14:12:41Z"
+		},
+		{
+			"checksumSHA1": "WGpttkYblWo6ORLYNt+le+hLr/w=",
+			"path": "github.com/segmentio/stats/httpstats",
+			"revision": "d5453edb8b8c439289c9dc721312766836a0909d",
+			"revisionTime": "2017-10-04T14:12:41Z"
+		},
+		{
+			"checksumSHA1": "3SZTatHIy9OTKc95YlVfXKnoySg=",
+			"path": "gopkg.in/alecthomas/kingpin.v2",
+			"revision": "1087e65c9441605df944fb12c33f0fe7072d18ca",
+			"revisionTime": "2017-07-27T04:22:29Z"
+		}
+	],
+	"rootPath": "GoHelloWorld"
+}
