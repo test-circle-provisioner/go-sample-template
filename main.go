@@ -36,7 +36,7 @@ func parseConfig() *config {
 
 const (
 	program = "Hello World Service"
-	version = "1.0.3"
+	version = "1.0.4"
 )
 
 func setupLogging(cfg *config) {
