@@ -6,4 +6,4 @@ RUN govendor install -ldflags '-s -w' .
 FROM debian:stretch
 RUN apt-get update -y && apt-get install -y ca-certificates
 COPY --from=builder /go/bin/go-hello-world /go-hello-world
-ENTRYPOINT [ "/goHelloWorld" ]
+ENTRYPOINT [ "/go-hello-world" ]
