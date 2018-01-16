@@ -1,9 +1,12 @@
-FROM segment/sources-build:v1.0.0 as builder
-WORKDIR /go/src/github.com/segmentio/go-hello-world/
-COPY . .
-RUN govendor install -ldflags '-s -w' .
+FROM golang:alpine
+ENV SRC github.com/segmentio/go-hello-world
+ARG VERSION
+COPY . /go/src/${SRC}
 
-FROM debian:stretch
-RUN apt-get update -y && apt-get install -y ca-certificates
-COPY --from=builder /go/bin/go-hello-world /go-hello-world
-ENTRYPOINT [ "/go-hello-world" ]
+RUN apk --update add git gcc \
+  && go install \
+  -ldflags="-X main.version=$VERSION" \
+  ${SRC} \
+  && apk del git gcc
+
+ENTRYPOINT ["go-hello-world"]
