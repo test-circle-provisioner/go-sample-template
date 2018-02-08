@@ -1,49 +1,86 @@
 version: 2
 jobs:
   build:
+    working_directory: /go/src/github.com/segmentio/go-hello-world
+
     docker:
-      - image: segment/sources-build:v1.0.0
-        auth:
-          username: $DOCKER_USER
-          password: $DOCKER_PASS
-    working_directory: /go/src/github.com/segmentio/go-hello-world/
+      - image: golang
+
     steps:
       - checkout
+      - restore_cache:
+          key: deps-{{ checksum "vendor/vendor.json" }}
+
       - run:
-          name: Running tests
-          command: govendor test -race +local
+          name: Configure netrc
+          command: |
+            echo "machine github.com login $GH_LOGIN" > ~/.netrc
+
       - setup_remote_docker:
-          version: 17.05.0-ce
           reusable: true
-          exclusive: false
+
       - run:
-          name: Logging into docker
+          name: Install docker engine
+          command: |
+            curl -L -o /tmp/docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-17.06.1-ce.tgz
+            tar -xz -C /tmp -f /tmp/docker.tgz
+            mv /tmp/docker/docker* /usr/bin/
+            curl -L "https://github.com/docker/compose/releases/download/1.14.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
+            chmod +x /usr/bin/docker-compose
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+      - run:
+          name: Authenticate to ECR
+          command: |
+            curl -O https://bootstrap.pypa.io/get-pip.py && python get-pip.py
+            pip install awscli
+            $(aws ecr get-login --no-include-email --region $AWS_REGION)
+
+      - run:
+          name: Dependencies
+          command: |
+            docker-compose pull
+            go get -u github.com/kardianos/govendor
+            make deps
+
+      - run:
+          name: Services
+          command: |
+            docker-compose up -d
+            docker-compose kill
+            docker-compose rm -fv
+            docker system prune -f --volumes
+            docker-compose up -d
+
+      - run:
+          name: Create test image
+          command: |
+            file=test-dockerfile
+            echo "FROM golang:1.9" >> $file
+            echo "COPY . $PWD" >> $file
+            echo "WORKDIR $PWD" >> $file
+            echo "RUN go version && go get -u github.com/kardianos/govendor" >> $file
+            docker build -t test -f $file .
+            rm $file
+
+      - run:
+          name: Test
+          command: |
+            docker run --rm \
+              --network host \
+              -it test \
+              make test
+
+      - save_cache:
+          key: deps-{{ checksum "vendor/vendor.json" }}
+          paths:
+            - vendor/
+
+      - run:
+          name: Deployment
           command: |
             if [ -n "$(git tag --points-at HEAD)" ]; then
-              docker login -u $DOCKER_USER -p $DOCKER_PASS
-              $(aws ecr get-login --no-include-email --region $AWS_REGION)
+                make release
             else
-              echo "skipping (no tag)"
-            fi
-      - run:
-          name: Building main image
-          command: |
-            tag=$(git tag --points-at HEAD)
-            if [ -n "$tag" ]; then
-              docker build -t segment/$CIRCLE_PROJECT_REPONAME:$tag .
-            else
-              echo "skipping (no tag)"
-            fi
-      - run:
-          name: Pushing main image
-          command: |
-            tag=$(git tag --points-at HEAD)
-            if [ -n "$tag" ]; then
-              ECR=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
-              for t in $(.circleci/tags $tag); do
-                docker tag segment/$CIRCLE_PROJECT_REPONAME:$tag $ECR/$CIRCLE_PROJECT_REPONAME:$t
-                docker push $ECR/$CIRCLE_PROJECT_REPONAME:$t
-              done
-            else
-              echo "skipping (no tag)"
+                echo "==> untagged: ignoring build"
             fi

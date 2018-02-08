@@ -1,0 +1,6 @@
+
+stats:
+  image: segment/dogstatsd
+  ports:
+    - "8125:8125/udp"
+  command: "agent"
