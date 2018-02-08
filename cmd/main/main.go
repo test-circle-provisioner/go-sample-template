@@ -110,6 +110,7 @@ func main() {
 	signal.Notify(sigchan, syscall.SIGINT, syscall.SIGTERM)
 	sig := <-sigchan
 	events.Log("stopping in response to signal %{signal}s.", sig)
+	stats.Flush()
 }
 
 // newRPCService wraps an RPC receiver with RPC level logging and metrics.
