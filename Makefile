@@ -1,22 +1,25 @@
 VERSION := $(shell git describe --tags --always --dirty="-dev")
+LDFLAGS := -ldflags='-X "main.version=$(VERSION)"'
+
+Q=@
 
 deps:
-	govendor sync
+	$Qdep ensure
 
 vet:
-	govendor vet ./...
+	$Qgovendor vet ./...
 
 test: vet
-	govendor test -v --cover --race -coverprofile=profile.out -covermode=atomic
+	$Qgo test -v -cover -race ./...
 
 build:
-	docker build --build-arg VERSION=$(VERSION) \
-		-t segment/go-hello-world:$(VERSION) \
+	$Qdocker build --build-arg VERSION=$(VERSION) \
+		-t segment/scrubber:$(VERSION) \
 		-t 528451384384.dkr.ecr.us-west-2.amazonaws.com/go-hello-world:$(VERSION) \
 		.
 
 release: build
-	docker push segment/go-hello-world:$(VERSION)
-	docker push 528451384384.dkr.ecr.us-west-2.amazonaws.com/go-hello-world:$(VERSION)
+	$Qdocker push segment/scrubber:$(VERSION)
+	$Qdocker push 528451384384.dkr.ecr.us-west-2.amazonaws.com/go-hello-world:$(VERSION)
 
 .PHONY: *

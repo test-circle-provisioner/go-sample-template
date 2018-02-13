@@ -5,11 +5,14 @@ jobs:
 
     docker:
       - image: golang
+        environment:
+          ECR_ENABLED: True
 
     steps:
       - checkout
+
       - restore_cache:
-          key: deps-{{ checksum "vendor/vendor.json" }}
+          key: deps-{{ checksum "Gopkg.lock" }}
 
       - run:
           name: Configure netrc
@@ -22,65 +25,41 @@ jobs:
       - run:
           name: Install docker engine
           command: |
-            curl -L -o /tmp/docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-17.06.1-ce.tgz
+            curl -L -o /tmp/docker.tgz https://get.docker.com/builds/Linux/x86_64/docker-1.12.6.tgz
             tar -xz -C /tmp -f /tmp/docker.tgz
             mv /tmp/docker/docker* /usr/bin/
-            curl -L "https://github.com/docker/compose/releases/download/1.14.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
-            chmod +x /usr/bin/docker-compose
-            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            curl -L "https://github.com/docker/compose/releases/download/1.10.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
+            chmod +x  /usr/bin/docker-compose
+            docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 
       - run:
-          name: Authenticate to ECR
+          name: ECR Login
           command: |
             curl -O https://bootstrap.pypa.io/get-pip.py && python get-pip.py
-            pip install awscli
-            $(aws ecr get-login --no-include-email --region $AWS_REGION)
+            pip install awscli==1.11.76
+            $(aws ecr get-login --region $AWS_REGION)
 
       - run:
           name: Dependencies
           command: |
-            docker-compose pull
-            go get -u github.com/kardianos/govendor
+            go get -u github.com/golang/dep/cmd/dep
             make deps
-
-      - run:
-          name: Services
-          command: |
-            docker-compose up -d
-            docker-compose kill
-            docker-compose rm -fv
-            docker system prune -f --volumes
-            docker-compose up -d
-
-      - run:
-          name: Create test image
-          command: |
-            file=test-dockerfile
-            echo "FROM golang:1.9" >> $file
-            echo "COPY . $PWD" >> $file
-            echo "WORKDIR $PWD" >> $file
-            echo "RUN go version && go get -u github.com/kardianos/govendor" >> $file
-            docker build -t test -f $file .
-            rm $file
 
       - run:
           name: Test
           command: |
-            docker run --rm \
-              --network host \
-              -it test \
-              make test
+            make test
 
       - save_cache:
-          key: deps-{{ checksum "vendor/vendor.json" }}
+          key: deps-{{ checksum "Gopkg.lock" }}
           paths:
             - vendor/
 
       - run:
           name: Deployment
           command: |
-            if [ -n "$(git tag --points-at HEAD)" ]; then
-                make release
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              make release
             else
-                echo "==> untagged: ignoring build"
+              echo "==> untagged: ignoring non-master branch"
             fi
