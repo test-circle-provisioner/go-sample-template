@@ -33,6 +33,10 @@
   name = "github.com/segmentio/events"
   version = "2.0.1"
 
+[[override]]
+  name = "github.com/segmentio/go-hello-world"
+  branch = "master"
+
 [prune]
   go-tests = true
   unused-packages = true

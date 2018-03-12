@@ -15,3 +15,8 @@ Provides a simple example of a production ready RPC service in Go. Instead of at
 
 * [govendor](https://github.com/kardianos/govendor): Dependency management tool.
 * [Golang Build Image](https://github.com/segmentio/golang-private-image): Containerized build process for Go.
+
+# Get started
+
+* make deps
+* make test
