@@ -18,5 +18,12 @@ Provides a simple example of a production ready RPC service in Go. Instead of at
 
 # Get started
 
-* make deps
-* make test
+
+```
+# Ensure your GOPATH is configured correctly.
+# https://github.com/golang/go/wiki/SettingGOPATH
+go get github.com/segmentio/go-hello-world
+cd $GOPATH/src/github.com/segmentio/go-hello-world
+make deps
+make test
+```
