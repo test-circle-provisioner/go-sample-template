@@ -44,12 +44,6 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/segmentio/go-hello-world"
-  packages = ["."]
-  revision = "4761d87c414b18a62bc9f6754588dfa2cb45bafb"
-
-[[projects]]
-  branch = "master"
   name = "github.com/segmentio/go-snakecase"
   packages = ["."]
   revision = "45c439a7815bbb735c7e000cbb73360d5f034fb9"
@@ -116,6 +110,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "c08d6d408266dbb1b09e993fa2861d68725046030bf4be7d78aa731e339b4fab"
+  inputs-digest = "4fd879177ee607f8b79ae8a9c8718d273adf6e1abb888f5532872c2bbb3a97aa"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -13,7 +13,7 @@ Provides a simple example of a production ready RPC service in Go. Instead of at
 
 # Tools
 
-* [govendor](https://github.com/kardianos/govendor): Dependency management tool.
+* [dep](https://github.com/golang/dep): Dependency management tool.
 * [Golang Build Image](https://github.com/segmentio/golang-private-image): Containerized build process for Go.
 
 # Get started
