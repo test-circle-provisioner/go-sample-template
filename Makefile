@@ -1,4 +1,4 @@
-VERSION := $(shell git rev-parse --short HEAD) + $(CIRCLE_BUILD_NUM)
+VERSION := $(shell git rev-parse --short HEAD)_$(CIRCLE_BUILD_NUM)
 LDFLAGS := -ldflags='-X "main.version=$(VERSION)"'
 
 Q=@
