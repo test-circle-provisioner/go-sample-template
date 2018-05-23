@@ -1,4 +1,4 @@
-VERSION := $(shell git describe --tags --always --dirty="-dev")
+VERSION := $(shell git rev-parse --short HEAD)
 LDFLAGS := -ldflags='-X "main.version=$(VERSION)"'
 
 Q=@
@@ -10,6 +10,10 @@ deps:
 .PHONY: vet
 vet:
 	$Qgo vet ./...
+
+.PHONY: generate
+generate:
+	$Qgo generate ./...
 
 .PHONY: test
 test: vet
