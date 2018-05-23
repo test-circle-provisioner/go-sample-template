@@ -15,6 +15,8 @@ Provides a simple example of a production ready RPC service in Go. Instead of at
 
 * [dep](https://github.com/golang/dep): Dependency management tool.
 * [Golang Build Image](https://github.com/segmentio/golang-private-image): Containerized build process for Go.
+* [Trebuchet](https://github.com/segmentio/trebuchet): For deploying our service.
+* [Docker](https://www.docker.com/): To package and ship our application.
 
 # Get started
 
