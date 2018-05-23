@@ -1,0 +1,46 @@
+name: go-hello-world
+
+container:
+  image: go-hello-world
+  repository: 528451384384.dkr.ecr.us-west-2.amazonaws.com
+  cmd:
+    - "--datadog_address"
+    - "172.17.42.1:8125"
+
+resources:
+  cpu_shares: 103
+  mem_mb: 128
+
+expose:
+  - name: http
+    port: 3000
+    proto: http
+    health_check_path: /internal/health
+
+count:
+  min: 1
+  max: 1
+
+  autoscale_policy: "disabled"
+
+labels:
+  team: libraries
+  owner: prateek@segment.com
+
+config-providers:
+  - name: "chamber"
+    type: "chamber"
+  - name: "tfe-stage"
+    type: "terraform"
+    options:
+      environment: "segment/stage"
+  - name: "tfe-prod"
+    type: "terraform"
+    options:
+      environment: "segment/production"
+
+autodeploy:
+  stage:
+    branch: "staging"
+  production:
+    branch: "master"

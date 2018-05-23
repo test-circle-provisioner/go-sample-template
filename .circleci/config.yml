@@ -58,8 +58,8 @@ jobs:
       - run:
           name: Deployment
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              make release
-            else
-              echo "==> untagged: ignoring non-master branch"
-            fi
+            make release
+
+      - store_artifacts:
+          path: .run
+          destination: trebuchet
