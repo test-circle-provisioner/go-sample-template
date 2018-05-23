@@ -1,3 +1,4 @@
+CIRCLE_BUILD_NUM := dev
 VERSION := $(shell git rev-parse --short HEAD)_$(CIRCLE_BUILD_NUM)
 LDFLAGS := -ldflags='-X "main.version=$(VERSION)"'
 
