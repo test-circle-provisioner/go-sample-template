@@ -1,7 +1,7 @@
-name: go-hello-world
+name: {{ .Name }}
 
 container:
-  image: go-hello-world
+  image: {{ .Name }}
   repository: 528451384384.dkr.ecr.us-west-2.amazonaws.com
   cmd:
     - "--datadog_address"
