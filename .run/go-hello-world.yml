@@ -39,8 +39,8 @@ config-providers:
     options:
       environment: "segment/production"
 
-autodeploy:
-  stage:
-    branch: "staging"
-  production:
-    branch: "master"
+# autodeploy:
+#   stage:
+#     branch: "staging"
+#   production:
+#     branch: "master"
