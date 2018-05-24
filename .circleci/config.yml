@@ -12,7 +12,7 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: deps-{{ checksum "Gopkg.lock" }}
+          key: deps-{{ `{{ checksum "Gopkg.lock" }}` }}
 
       - run:
           name: Configure netrc
@@ -51,7 +51,7 @@ jobs:
             make test
 
       - save_cache:
-          key: deps-{{ checksum "Gopkg.lock" }}
+          key: deps-{{ `{{ checksum "Gopkg.lock" }}` }}
           paths:
             - vendor/
 
