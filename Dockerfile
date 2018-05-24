@@ -1,5 +1,5 @@
 FROM golang:alpine
-ENV SRC github.com/segmentio/{{ .Name }}
+ENV SRC github.com/test-circle-provisioner/{{ .Name }}
 ARG VERSION
 COPY . /go/src/${SRC}
 

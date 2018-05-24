@@ -25,7 +25,7 @@
 # Ensure your GOPATH is configured correctly.
 # https://github.com/golang/go/wiki/SettingGOPATH
 go get github.com/segmentio/{{ .Name }}
-cd $GOPATH/src/github.com/segmentio/{{ .Name }}
+cd $GOPATH/src/github.com/test-circle-provisioner/{{ .Name }}
 make deps
 make test
 ```

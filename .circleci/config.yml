@@ -1,10 +1,10 @@
 version: 2
 jobs:
   build:
-    working_directory: /go/src/github.com/segmentio/{{ .Name }}
+    working_directory: /go/src/github.com/test-circle-provisioner/{{ .Name }}
 
     docker:
-      - image: golang
+      - image: segment/circleci-golang:1.9
         environment:
           ECR_ENABLED: True
 
@@ -25,9 +25,7 @@ jobs:
       - run:
           name: ECR Login
           command: |
-            curl -O https://bootstrap.pypa.io/get-pip.py && python get-pip.py
-            pip install awscli==1.11.76
-            $(aws ecr get-login --region $AWS_REGION)
+            $(aws ecr get-login --no-include-email --region $AWS_REGION)
 
       - run:
           name: Dependencies
