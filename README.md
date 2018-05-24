@@ -1,6 +1,6 @@
-# go-hello-world
+# {{ .Name }}
 
-Provides a simple example of a production ready RPC service in Go. Instead of attempting to abstract away the details of bootstrapping a new service, this is meant to be used as a blueprint of how to piece together various libraries.
+{{ .Name }} is a simple example of a production ready RPC service in Go. Instead of attempting to abstract away the details of bootstrapping a new service, this is meant to be used as a blueprint of how to piece together various libraries.
 
 # Libraries
 
@@ -24,8 +24,8 @@ Provides a simple example of a production ready RPC service in Go. Instead of at
 ```
 # Ensure your GOPATH is configured correctly.
 # https://github.com/golang/go/wiki/SettingGOPATH
-go get github.com/segmentio/go-hello-world
-cd $GOPATH/src/github.com/segmentio/go-hello-world
+go get github.com/segmentio/{{ .Name }}
+cd $GOPATH/src/github.com/segmentio/{{ .Name }}
 make deps
 make test
 ```

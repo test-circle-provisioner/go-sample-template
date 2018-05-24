@@ -22,10 +22,9 @@ test: vet
 .PHONY: build
 build:
 	$Qdocker build --build-arg VERSION=$(VERSION) \
-		-t segment/go-hello-world:$(VERSION) \
-		-t 528451384384.dkr.ecr.us-west-2.amazonaws.com/go-hello-world:$(VERSION) \
+		-t 528451384384.dkr.ecr.us-west-2.amazonaws.com/{{ .Name }}:$(VERSION) \
 		.
 
 .PHONY: release
 release: build
-	$Qdocker push 528451384384.dkr.ecr.us-west-2.amazonaws.com/go-hello-world:$(VERSION)
+	$Qdocker push 528451384384.dkr.ecr.us-west-2.amazonaws.com/{{ .Name }}:$(VERSION)

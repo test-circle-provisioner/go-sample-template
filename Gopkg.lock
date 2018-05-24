@@ -31,14 +31,7 @@
 
 [[projects]]
   name = "github.com/segmentio/events"
-  packages = [
-    ".",
-    "ecslogs",
-    "httpevents",
-    "log",
-    "sigevents",
-    "text"
-  ]
+  packages = [".","ecslogs","httpevents","log","sigevents","text"]
   revision = "406fcabaf3d3a8c0d790b3bbf7e3f795e277124e"
   version = "v2.0.1"
 
@@ -50,36 +43,17 @@
 
 [[projects]]
   name = "github.com/segmentio/objconv"
-  packages = [
-    ".",
-    "adapters",
-    "adapters/net",
-    "adapters/net/mail",
-    "adapters/net/url",
-    "json",
-    "objutil",
-    "yaml"
-  ]
+  packages = [".","adapters","adapters/net","adapters/net/mail","adapters/net/url","json","objutil","yaml"]
   revision = "98b459234b772da091ad987acb581db1c9fbf7f3"
 
 [[projects]]
   name = "github.com/segmentio/rpc"
-  packages = [
-    ".",
-    "rpcevents",
-    "rpcstats"
-  ]
+  packages = [".","rpcevents","rpcstats"]
   revision = "76da725d48b4da4ad4b79fa72cbc789fb03f8597"
 
 [[projects]]
   name = "github.com/segmentio/stats"
-  packages = [
-    ".",
-    "datadog",
-    "httpstats",
-    "procstats",
-    "procstats/linux"
-  ]
+  packages = [".","datadog","httpstats","procstats","procstats/linux"]
   revision = "277457325baa3e1a594aaaf15b255caa884a23c8"
 
 [[projects]]
@@ -89,10 +63,7 @@
 
 [[projects]]
   name = "gopkg.in/go-playground/mold.v2"
-  packages = [
-    ".",
-    "modifiers"
-  ]
+  packages = [".","modifiers"]
   revision = "6bc20ce40733e8e04c2fda4523a957dd8e198948"
   version = "v2.2.0"
 
@@ -110,6 +81,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "4fd879177ee607f8b79ae8a9c8718d273adf6e1abb888f5532872c2bbb3a97aa"
+  inputs-digest = "0d8e95a5e2d0ca79854869108a536687232dd957036fe46aa3b11e26e6aa1763"
   solver-name = "gps-cdcl"
   solver-version = 1

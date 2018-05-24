@@ -1,12 +1,12 @@
 FROM golang:alpine
-ENV SRC github.com/segmentio/go-hello-world
+ENV SRC github.com/segmentio/{{ .Name }}
 ARG VERSION
 COPY . /go/src/${SRC}
 
 RUN apk --update add git gcc \
   && go install \
   -ldflags="-X main.version=$VERSION" \
-  ${SRC}/cmd/go-hello-world \
+  ${SRC}/cmd/{{ .Name }} \
   && apk del git gcc
 
-ENTRYPOINT ["go-hello-world"]
+ENTRYPOINT ["{{ .Name }}"]
