@@ -23,16 +23,6 @@ jobs:
           reusable: true
 
       - run:
-          name: Install docker engine
-          command: |
-            curl -L -o /tmp/docker.tgz https://get.docker.com/builds/Linux/x86_64/docker-1.12.6.tgz
-            tar -xz -C /tmp -f /tmp/docker.tgz
-            mv /tmp/docker/docker* /usr/bin/
-            curl -L "https://github.com/docker/compose/releases/download/1.10.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
-            chmod +x  /usr/bin/docker-compose
-            docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-
-      - run:
           name: ECR Login
           command: |
             curl -O https://bootstrap.pypa.io/get-pip.py && python get-pip.py
