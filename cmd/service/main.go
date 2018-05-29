@@ -18,7 +18,7 @@ import (
 	_ "github.com/segmentio/events/sigevents"
 	_ "github.com/segmentio/events/text"
 
-	"github.com/test-circle-provisioner/{{ .Name }}"
+	"github.com/{{ .Org }}/{{ .Name }}"
 
 	"github.com/segmentio/rpc"
 	"github.com/segmentio/rpc/rpcevents"
